@@ -6,8 +6,8 @@ def test():
 	log.error("ERROR")
 	log.warning("WARNING")
 	log.success("SUCCESS")
-	log.info("INFO")
-	log.debug("DEBUG")
-	log.note("NOTE")
 
 test()
+log.info("INFO")
+log.debug("DEBUG")
+log.note("NOTE")
