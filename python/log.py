@@ -14,6 +14,15 @@ COLOURS = {
 	"trace":     colours.BLACK
 }
 
+LEVELS = {
+	"error",
+	"warning",
+	"success",
+	"debug",
+	"info",
+	"note"
+}
+
 PREFIXES = {
 	"error":     "X",
 	"warning":   "!",
@@ -23,20 +32,53 @@ PREFIXES = {
 	"note":      "@"
 }
 
+SUPPRESSED = {
+	"error":     False,
+	"warning":   False,
+	"success":   False,
+	"debug":     False,
+	"info":      False,
+	"note":      False
+}
+
 TRACE = {
 	"file":     False,
 	"line":     False,
 	"caller":   False
 }
 
-def trace_file(enabled):
-	TRACE["file"] = enabled
+DISABLED = False
+NO_TRACE = True
 
-def trace_line(enabled):
-	TRACE["line"] = enabled
+def __trace():
+	if NO_TRACE:
+		return ""
 
-def trace_caller(enabled):
-	TRACE["caller"] = enabled
+	file = ""
+	line = ""
+	caller = ""
+
+	stack_trace = inspect.stack()
+
+	if TRACE["file"]:
+		file = str(stack_trace[3][1]) + ":"
+
+	if TRACE["line"]:
+		line = str(stack_trace[3][2]) + ":"
+
+	if TRACE["caller"]:
+		caller = str(stack_trace[3][3]) + ":"
+
+	return "{}{}{}".format(file, line, caller)
+
+def __prefix(level):
+	return "{}{}{}".format(COLOURS[level], PREFIXES[level], COLOURS["reset"])
+
+def __format(level, message):
+	if DISABLED or SUPPRESSED[level]:
+		return ""
+	else:
+		return "{} {} {}\r\n".format(__trace(), __prefix(level), str(message))
 
 def enable():
 	global DISABLED
@@ -46,44 +88,40 @@ def disable():
 	global DISABLED
 	DISABLED = True
 
-def format(message):
-	if DISABLED:
-		return ""
+def suppress(level):
+	if level in LEVELS:
+		SUPPRESSED[level] = True
 
-	stack_trace = inspect.stack()
-	level = stack_trace[1][3]
+def unsuppress(level):
+	if level in LEVELS:
+		SUPPRESSED[level] = False
 
-	if TRACE["file"]:
-		file = str(stack_trace[2][1]) + ":"
+def trace(file, line, caller):
+	TRACE["file"] = file
+	TRACE["line"] = line
+	TRACE["caller"] = caller
+
+	global NO_TRACE
+
+	if not file and not line and not caller:
+		NO_TRACE = True
 	else:
-		file = ""
-
-	if TRACE["line"]:
-		line = str(stack_trace[2][2]) + ":"
-	else:
-		line = ""
-
-	if TRACE["caller"]:
-		caller = str(stack_trace[2][3]) + ":"
-	else:
-		caller = ""
-
-	return "{}{}{} {}{}{} {}\r\n".format(file, line, caller, COLOURS[level], PREFIXES[level], COLOURS["reset"], str(message))
+		NO_TRACE = False
 
 def error(message):
-	print(format(message), end="")
+	print(__format("error", message), end="")
 
 def warning(message):
-	print(format(message), end="")
+	print(__format("warning", message), end="")
 
 def success(message):
-	print(format(message), end="")
+	print(__format("success", message), end="")
 
 def debug(message):
-	print(format(message), end="")
+	print(__format("debug", message), end="")
 
 def info(message):
-	print(format(message), end="")
+	print(__format("info", message), end="")
 
 def note(message):
-	print(format(message), end="")
+	print(__format("note", message), end="")
