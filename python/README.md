@@ -15,7 +15,6 @@ note(message)
 
 Each log level has a prefix symbol with a unique ANSI colour.  If your terminal does not support colours, you can disable it:
 
-
 ```
 colourless()
 colourize()
@@ -74,4 +73,3 @@ __main__: > INFO
 __main__: # DEBUG
 __main__: @ NOTE
 ```
-
