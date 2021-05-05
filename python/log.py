@@ -9,9 +9,7 @@ COLOURS = {
 	"success":   colours.GREEN,
 	"debug":     colours.BLUE,
 	"info":      colours.CYAN,
-	"note":      colours.MAGENTA,
-	"reset":     colours.RESET,
-	"trace":     colours.BLACK
+	"note":      colours.MAGENTA
 }
 
 LEVELS = {
@@ -49,44 +47,45 @@ TRACE = {
 	"caller":   False
 }
 
-DISABLE_LOGS = False
-DISABLE_TRACE = True
-DISABLE_COLOUR = False
+ENABLE_LOGS = True
+ENABLE_TRACE = False
+ENABLE_COLOUR = True
 
 # ===================== INTERNAL FUNCTIONS ===================== #
 
 def __trace():
-	if DISABLE_TRACE:
+	if not ENABLE_TRACE:
 		return ""
 
-	stack_trace = inspect.stack()
+	stack = inspect.stack()
 	file = ""
 	line = ""
 	caller = ""
 
 	if TRACE["file"]:
-		file = str(stack_trace[3][1]) + ":"
+		file = str(stack[3][1]) + ":"
 	if TRACE["line"]:
-		line = str(stack_trace[3][2]) + ":"
+		line = str(stack[3][2]) + ":"
 	if TRACE["caller"]:
-		caller = str(stack_trace[3][3])
+		caller = str(stack[3][3])
 		if caller == "<module>":
 			caller = "__main__"
 		caller += ":"
 
-	return "{}{}{}".format(file, line, caller)
+	return "{}{}{} ".format(file, line, caller)
 
 def __prefix(level):
-	if DISABLE_COLOUR:
-		return PREFIXES[level]
+	if ENABLE_COLOUR:
+		return "{}{}{} ".format(COLOURS[level], PREFIXES[level], colours.RESET)
 	else:
-		return "{}{}{}".format(COLOURS[level], PREFIXES[level], COLOURS["reset"])
+		return "{} ".format(PREFIXES[level])
+
 
 def __format(level, message):
-	if DISABLE_LOGS or SUPPRESSED[level]:
+	if SUPPRESSED[level] or not ENABLE_LOGS:
 		return ""
 	else:
-		return "{} {} {}\r\n".format(__trace(), __prefix(level), str(message))
+		return "{}{}{}\r\n".format(__trace(), __prefix(level), str(message))
 
 def __invalid_level(level):
 	print("'{}' is an invalid log level".format(level))
@@ -95,12 +94,12 @@ def __invalid_level(level):
 # ===================== LOGGING API ===================== #
 
 def enable():
-	global DISABLE_LOGS
-	DISABLE_LOGS = False
+	global ENABLE_LOGS
+	ENABLE_LOGS = True
 
 def disable():
-	global DISABLE_LOGS
-	DISABLE_LOGS = True
+	global ENABLE_LOGS
+	ENABLE_LOGS = False
 
 def suppress(level):
 	if level in LEVELS:
@@ -117,23 +116,23 @@ def show(level):
 		raise "Invalid valid log level"
 
 def colourize():
-	global DISABLE_COLOUR
-	DISABLE_COLOUR = False
+	global ENABLE_COLOUR
+	ENABLE_COLOUR = True
 
 def colourless():
-	global DISABLE_COLOUR
-	DISABLE_COLOUR = True
+	global ENABLE_COLOUR
+	ENABLE_COLOUR = False
 
 def trace(file, line, caller):
 	TRACE["file"] = file
 	TRACE["line"] = line
 	TRACE["caller"] = caller
 
-	global DISABLE_TRACE
-	if not file and not line and not caller:
-		DISABLE_TRACE = True
+	global ENABLE_TRACE
+	if file or line or caller:
+		ENABLE_TRACE = True
 	else:
-		DISABLE_TRACE = False
+		ENABLE_TRACE = False
 
 def error(message):
 	print(__format("error", message), end = "")
