@@ -14,5 +14,8 @@ int main(void)
 	test();
 	log_info("INFO");
 	log_debug("DEBUG");
+
+	log_suppress(LOG_ERROR);
+	log_error("ERROR");
 	log_note("NOTE");
 }

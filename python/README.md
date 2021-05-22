@@ -71,6 +71,9 @@ def test():
 test()
 log.info("INFO")
 log.debug("DEBUG")
+
+log.suppress("ERROR")
+log.error("ERROR")
 log.note("NOTE")
 ```
 

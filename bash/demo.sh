@@ -14,4 +14,7 @@ test()
 test
 log_info "INFO"
 log_debug "DEBUG"
+
+log_suppress ERROR
+log_error "ERROR"
 log_note "NOTE"

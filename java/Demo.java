@@ -14,6 +14,9 @@ class Demo
 		test();
 		Log.info("INFO");
 		Log.debug("DEBUG");
+
+		Log.suppress(Log.Level.ERROR);
+		Log.error("ERROR");
 		Log.note("NOTE");
 	}
 }
