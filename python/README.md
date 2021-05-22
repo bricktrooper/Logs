@@ -13,6 +13,17 @@ info(message)
 note(message)
 ```
 
+Each log level has an associated `str`:
+
+```
+"error"
+"warning"
+"success"
+"debug"
+"info"
+"note"
+```
+
 Each log level has a prefix symbol with a unique ANSI colour.  If your terminal does not support colours, you can disable it:
 
 ```
