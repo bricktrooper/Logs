@@ -107,9 +107,9 @@ void log_trace(bool file, bool line, bool caller)
 	ENABLE_TRACE = file || line || caller;
 }
 
-void log_print(char const * file, int line, char const * function, LogLevel level, char const * format, ...)
+void log_print(char const * file, int line, char const * caller, LogLevel level, char const * format, ...)
 {
-	if (format == NULL || function == NULL || file == NULL || level >= NUM_LOG_LEVELS)
+	if (format == NULL || caller == NULL || file == NULL || level >= NUM_LOG_LEVELS)
 	{
 		return;
 	}
@@ -133,7 +133,7 @@ void log_print(char const * file, int line, char const * function, LogLevel leve
 
 		if (TRACE_CALLER)
 		{
-			printf("%s:", function);
+			printf("%s:", caller);
 		}
 
 		printf(" ");
