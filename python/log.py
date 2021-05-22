@@ -106,14 +106,14 @@ def suppress(level):
 		SUPPRESSED[level] = True
 	else:
 		__invalid_level(level)
-		raise "Invalid valid log level"
+		raise "Invalid log level"
 
 def show(level):
 	if level in LEVELS:
 		SUPPRESSED[level] = False
 	else:
 		__invalid_level(level)
-		raise "Invalid valid log level"
+		raise "Invalid log level"
 
 def colourize():
 	global ENABLE_COLOUR
