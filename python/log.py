@@ -62,11 +62,11 @@ def get_trace():
 	line = ""
 	caller = ""
 
-	if TRACE["file"]:
+	if TRACE["FILE"]:
 		file = str(stack[3][1]) + ":"
-	if TRACE["line"]:
+	if TRACE["LINE"]:
 		line = str(stack[3][2]) + ":"
-	if TRACE["caller"]:
+	if TRACE["CALLER"]:
 		caller = str(stack[3][3])
 		if caller == "<module>":
 			caller = "__main__"
