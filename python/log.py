@@ -4,47 +4,47 @@ import inspect
 # ===================== CONSTANTS ===================== #
 
 COLOURS = {
-	"error":     colours.RED,
-	"warning":   colours.YELLOW,
-	"success":   colours.GREEN,
-	"debug":     colours.BLUE,
-	"info":      colours.CYAN,
-	"note":      colours.MAGENTA
+	"ERROR":   colours.RED,
+	"WARNING": colours.YELLOW,
+	"SUCCESS": colours.GREEN,
+	"DEBUG":   colours.BLUE,
+	"INFO":    colours.CYAN,
+	"NOTE":    colours.MAGENTA
 }
 
 LEVELS = {
-	"error",
-	"warning",
-	"success",
-	"debug",
-	"info",
-	"note"
+	"ERROR",
+	"WARNING",
+	"SUCCESS",
+	"DEBUG",
+	"INFO",
+	"NOTE"
 }
 
 PREFIXES = {
-	"error":     "X",
-	"warning":   "!",
-	"success":   "~",
-	"debug":     "#",
-	"info":      ">",
-	"note":      "@"
+	"ERROR":   "X",
+	"WARNING": "!",
+	"SUCCESS": "~",
+	"DEBUG":   "#",
+	"INFO":    ">",
+	"NOTE":    "@"
 }
 
 # ===================== FLAGS ===================== #
 
 SUPPRESSED = {
-	"error":     False,
-	"warning":   False,
-	"success":   False,
-	"debug":     False,
-	"info":      False,
-	"note":      False
+	"ERROR":   False,
+	"WARNING": False,
+	"SUCCESS": False,
+	"DEBUG":   False,
+	"INFO":    False,
+	"NOTE":    False
 }
 
 TRACE = {
-	"file":     False,
-	"line":     False,
-	"caller":   False
+	"FILE":   False,
+	"LINE":   False,
+	"CALLER": False
 }
 
 ENABLE_LOGS = True
@@ -106,14 +106,14 @@ def suppress(level):
 		SUPPRESSED[level] = True
 	else:
 		__invalid_level(level)
-		raise "Invalid log level"
+		raise Exception("Invalid log level")
 
 def show(level):
 	if level in LEVELS:
 		SUPPRESSED[level] = False
 	else:
 		__invalid_level(level)
-		raise "Invalid log level"
+		raise Exception("Invalid log level")
 
 def colourize():
 	global ENABLE_COLOUR
@@ -135,19 +135,19 @@ def trace(file, line, caller):
 		ENABLE_TRACE = False
 
 def error(message):
-	print(__format("error", message), end = "")
+	print(__format("ERROR", message), end = "")
 
 def warning(message):
-	print(__format("warning", message), end = "")
+	print(__format("WARNING", message), end = "")
 
 def success(message):
-	print(__format("success", message), end = "")
+	print(__format("SUCCESS", message), end = "")
 
 def debug(message):
-	print(__format("debug", message), end = "")
+	print(__format("DEBUG", message), end = "")
 
 def info(message):
-	print(__format("info", message), end = "")
+	print(__format("INFO", message), end = "")
 
 def note(message):
-	print(__format("note", message), end = "")
+	print(__format("NOTE", message), end = "")
