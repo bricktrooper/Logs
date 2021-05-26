@@ -124,9 +124,9 @@ def colourless():
 	ENABLE_COLOUR = False
 
 def trace(file, line, caller):
-	TRACE["file"] = file
-	TRACE["line"] = line
-	TRACE["caller"] = caller
+	TRACE["FILE"] = file
+	TRACE["LINE"] = line
+	TRACE["CALLER"] = caller
 
 	global ENABLE_TRACE
 	if file or line or caller:
