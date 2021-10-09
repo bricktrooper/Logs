@@ -13,15 +13,15 @@ info(message)
 note(message)
 ```
 
-Each log level has an associated `str`:
+Each log level has an associated enum:
 
 ```
-"error"
-"warning"
-"success"
-"debug"
-"info"
-"note"
+log.Level.ERROR
+log.Level.WARNING
+log.Level.SUCCESS
+log.Level.DEBUG
+log.Level.INFO
+log.Level.NOTE
 ```
 
 Each log level has a prefix symbol with a unique ANSI colour.  If your terminal does not support colours, you can disable it:
@@ -72,7 +72,7 @@ test()
 log.info("INFO")
 log.debug("DEBUG")
 
-log.suppress("ERROR")
+log.suppress(log.Level.ERROR)
 log.error("ERROR")
 log.note("NOTE")
 ```
@@ -80,10 +80,10 @@ log.note("NOTE")
 #### Output
 
 ```
-test: X ERROR
-test: ! WARNING
-test: ~ SUCCESS
-__main__: > INFO
-__main__: # DEBUG
-__main__: @ NOTE
+X test: ERROR
+! test: WARNING
+~ test: SUCCESS
+> __main__: INFO
+# __main__: DEBUG
+@ __main__: NOTE
 ```
