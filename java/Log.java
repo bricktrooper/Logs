@@ -5,19 +5,19 @@ import java.lang.StackTraceElement;
 
 class Log
 {
-	private static final String ERROR_COLOUR   = Colours.RED;
-	static final String WARNING_COLOUR = Colours.YELLOW;
-	static final String SUCCESS_COLOUR = Colours.GREEN;
-	static final String DEBUG_COLOUR   = Colours.BLUE;
-	static final String INFO_COLOUR    = Colours.CYAN;
-	static final String NOTE_COLOUR    = Colours.MAGENTA;
+	private static final String ERROR_COLOUR = Colours.RED;
+	private static final String WARNING_COLOUR = Colours.YELLOW;
+	private static final String SUCCESS_COLOUR = Colours.GREEN;
+	private static final String DEBUG_COLOUR   = Colours.BLUE;
+	private static final String INFO_COLOUR    = Colours.CYAN;
+	private static final String NOTE_COLOUR    = Colours.MAGENTA;
 
-	static final String ERROR_PREFIX   = "X";
-	static final String WARNING_PREFIX = "!";
-	static final String SUCCESS_PREFIX = "~";
-	static final String DEBUG_PREFIX   = "#";
-	static final String INFO_PREFIX    = ">";
-	static final String NOTE_PREFIX    = "@";
+	private static final String ERROR_PREFIX   = "X";
+	private static final String WARNING_PREFIX = "!";
+	private static final String SUCCESS_PREFIX = "~";
+	private static final String DEBUG_PREFIX   = "#";
+	private static final String INFO_PREFIX    = ">";
+	private static final String NOTE_PREFIX    = "@";
 
 	private static final String [] PREFIXES = {
 		ERROR_PREFIX,
@@ -132,7 +132,7 @@ class Log
 		}
 		else
 		{
-			return String.format("%s%s%s\r\n", getTrace(), getPrefix(level), String.format(format, args));
+			return String.format("%s%s%s\r\n", getPrefix(level), getTrace(), String.format(format, args));
 		}
 	}
 
