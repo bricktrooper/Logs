@@ -119,6 +119,13 @@ void log_print(char const * file, int line, char const * caller, LogLevel level,
 		return;
 	}
 
+	if (ENABLE_COLOUR)
+	{
+		printf("%s", COLOURS[level]);
+	}
+
+	printf("%s" RESET " ", PREFIXES[level]);
+
 	if (ENABLE_TRACE)
 	{
 		if (TRACE_FILE)
@@ -138,13 +145,6 @@ void log_print(char const * file, int line, char const * caller, LogLevel level,
 
 		printf(" ");
 	}
-
-	if (ENABLE_COLOUR)
-	{
-		printf("%s", COLOURS[level]);
-	}
-
-	printf("%s" RESET " ", PREFIXES[level]);
 
 	va_list args;
     va_start(args, format);

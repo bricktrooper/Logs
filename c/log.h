@@ -42,6 +42,6 @@ void log_show(LogLevel level);
 void log_colourize(void);
 void log_colourless(void);
 void log_trace(bool file, bool line, bool caller);
-void log_print(char const * file, int line, char const * function, LogLevel level, char const * format, ...) __attribute__ ((format (printf, 5, 6)));
+void log_print(char const * file, int line, char const * caller, LogLevel level, char const * format, ...) __attribute__ ((format (printf, 5, 6)));
 
 #endif /* LOG_H */
