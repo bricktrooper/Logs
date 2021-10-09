@@ -116,7 +116,7 @@ format_message()
 	else
 		local TRACE=`get_trace`
 		local PREFIX=`get_prefix ${LEVEL}`
-		echo "${TRACE}${PREFIX}${MESSAGE}\r\n"
+		echo "${PREFIX}${TRACE}${MESSAGE}\r\n"
 	fi
 }
 
