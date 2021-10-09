@@ -94,10 +94,10 @@ int main(void)
 #### Output
 
 ```
-test: X ERROR
-test: ! WARNING
-test: ~ SUCCESS
-main: > INFO
-main: # DEBUG
-main: @ NOTE
+X test: ERROR
+! test: WARNING
+~ test: SUCCESS
+> main: INFO
+# main: DEBUG
+@ main: NOTE
 ```
