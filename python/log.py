@@ -1,15 +1,27 @@
 import colours
 import inspect
 
+from enum import Enum
+
+# ===================== LEVELS ===================== #
+
+class Level(Enum):
+	ERROR = 0
+	WARNING = 1
+	SUCCESS = 2
+	DEBUG = 3
+	INFO = 4
+	NOTE = 5
+
 # ===================== CONSTANTS ===================== #
 
 COLOURS = {
-	"ERROR":   colours.RED,
-	"WARNING": colours.YELLOW,
-	"SUCCESS": colours.GREEN,
-	"DEBUG":   colours.BLUE,
-	"INFO":    colours.CYAN,
-	"NOTE":    colours.MAGENTA
+	Level.ERROR:   colours.RED,
+	Level.WARNING: colours.YELLOW,
+	Level.SUCCESS: colours.GREEN,
+	Level.DEBUG:   colours.BLUE,
+	Level.INFO:    colours.CYAN,
+	Level.NOTE:    colours.MAGENTA
 }
 
 LEVELS = {
@@ -22,29 +34,34 @@ LEVELS = {
 }
 
 PREFIXES = {
-	"ERROR":   "X",
-	"WARNING": "!",
-	"SUCCESS": "~",
-	"DEBUG":   "#",
-	"INFO":    ">",
-	"NOTE":    "@"
+	Level.ERROR:   "X",
+	Level.WARNING: "!",
+	Level.SUCCESS: "~",
+	Level.DEBUG:   "#",
+	Level.INFO:    ">",
+	Level.NOTE:    "@"
 }
 
 # ===================== FLAGS ===================== #
 
 SUPPRESSED = {
-	"ERROR":   False,
-	"WARNING": False,
-	"SUCCESS": False,
-	"DEBUG":   False,
-	"INFO":    False,
-	"NOTE":    False
+	Level.ERROR:   False,
+	Level.WARNING: False,
+	Level.SUCCESS: False,
+	Level.DEBUG:   False,
+	Level.INFO:    False,
+	Level.NOTE:    False
 }
 
+class Trace(Enum):
+	FILE = 0
+	LINE = 1
+	CALLER = 2
+
 TRACE = {
-	"FILE":   False,
-	"LINE":   False,
-	"CALLER": False
+	Trace.FILE:   False,
+	Trace.LINE:   False,
+	Trace.CALLER: False
 }
 
 ENABLE_LOGS = True
@@ -62,11 +79,11 @@ def __trace():
 	line = ""
 	caller = ""
 
-	if TRACE["FILE"]:
+	if TRACE[Trace.FILE]:
 		file = str(stack[3][1]) + ":"
-	if TRACE["LINE"]:
+	if TRACE[Trace.LINE]:
 		line = str(stack[3][2]) + ":"
-	if TRACE["CALLER"]:
+	if TRACE[Trace.CALLER]:
 		caller = str(stack[3][3])
 		if caller == "<module>":
 			caller = "__main__"
@@ -102,14 +119,14 @@ def disable():
 	ENABLE_LOGS = False
 
 def suppress(level):
-	if level in LEVELS:
+	if level in Level:
 		SUPPRESSED[level] = True
 	else:
 		__invalid(level)
 		raise Exception("Invalid log level")
 
 def show(level):
-	if level in LEVELS:
+	if level in Level:
 		SUPPRESSED[level] = False
 	else:
 		__invalid(level)
@@ -124,9 +141,9 @@ def colourless():
 	ENABLE_COLOUR = False
 
 def trace(file, line, caller):
-	TRACE["FILE"] = file
-	TRACE["LINE"] = line
-	TRACE["CALLER"] = caller
+	TRACE[Trace.FILE] = file
+	TRACE[Trace.LINE] = line
+	TRACE[Trace.CALLER] = caller
 
 	global ENABLE_TRACE
 	if file or line or caller:
@@ -135,19 +152,19 @@ def trace(file, line, caller):
 		ENABLE_TRACE = False
 
 def error(message):
-	print(__format("ERROR", message), end = "")
+	print(__format(Level.ERROR, message), end = "")
 
 def warning(message):
-	print(__format("WARNING", message), end = "")
+	print(__format(Level.WARNING, message), end = "")
 
 def success(message):
-	print(__format("SUCCESS", message), end = "")
+	print(__format(Level.SUCCESS, message), end = "")
 
 def debug(message):
-	print(__format("DEBUG", message), end = "")
+	print(__format(Level.DEBUG, message), end = "")
 
 def info(message):
-	print(__format("INFO", message), end = "")
+	print(__format(Level.INFO, message), end = "")
 
 def note(message):
-	print(__format("NOTE", message), end = "")
+	print(__format(Level.NOTE, message), end = "")
