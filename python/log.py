@@ -53,7 +53,7 @@ ENABLE_COLOUR = True
 
 # ===================== INTERNAL FUNCTIONS ===================== #
 
-def get_trace():
+def __trace():
 	if not ENABLE_TRACE:
 		return ""
 
@@ -74,20 +74,20 @@ def get_trace():
 
 	return "{}{}{} ".format(file, line, caller)
 
-def get_prefix(level):
+def __prefix(level):
 	if ENABLE_COLOUR:
 		return "{}{}{} ".format(COLOURS[level], PREFIXES[level], colours.RESET)
 	else:
 		return "{} ".format(PREFIXES[level])
 
 
-def format_message(level, message):
+def __format(level, message):
 	if SUPPRESSED[level] or not ENABLE_LOGS:
 		return ""
 	else:
-		return "{}{}{}\r\n".format(get_trace(), get_prefix(level), str(message))
+		return "{}{}{}\r\n".format(__prefix(level), __trace(), str(message))
 
-def print_invalid_level(level):
+def __invalid(level):
 	print("'{}' is an invalid log level".format(level))
 	print("Valid log levels: {}".format(LEVELS))
 
@@ -105,14 +105,14 @@ def suppress(level):
 	if level in LEVELS:
 		SUPPRESSED[level] = True
 	else:
-		print_invalid_level(level)
+		__invalid(level)
 		raise Exception("Invalid log level")
 
 def show(level):
 	if level in LEVELS:
 		SUPPRESSED[level] = False
 	else:
-		print_invalid_level(level)
+		__invalid(level)
 		raise Exception("Invalid log level")
 
 def colourize():
@@ -135,19 +135,19 @@ def trace(file, line, caller):
 		ENABLE_TRACE = False
 
 def error(message):
-	print(format_message("ERROR", message), end = "")
+	print(__format("ERROR", message), end = "")
 
 def warning(message):
-	print(format_message("WARNING", message), end = "")
+	print(__format("WARNING", message), end = "")
 
 def success(message):
-	print(format_message("SUCCESS", message), end = "")
+	print(__format("SUCCESS", message), end = "")
 
 def debug(message):
-	print(format_message("DEBUG", message), end = "")
+	print(__format("DEBUG", message), end = "")
 
 def info(message):
-	print(format_message("INFO", message), end = "")
+	print(__format("INFO", message), end = "")
 
 def note(message):
-	print(format_message("NOTE", message), end = "")
+	print(__format("NOTE", message), end = "")
