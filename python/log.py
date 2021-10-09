@@ -13,6 +13,9 @@ class Level(Enum):
 	INFO = 4
 	NOTE = 5
 
+	def list():
+		return ["Level.ERROR", "Level.WARNING", "Level.SUCCESS", "Level.DEBUG", "Level.INFO", "Level.NOTE"]
+
 # ===================== CONSTANTS ===================== #
 
 COLOURS = {
@@ -22,15 +25,6 @@ COLOURS = {
 	Level.DEBUG:   colours.BLUE,
 	Level.INFO:    colours.CYAN,
 	Level.NOTE:    colours.MAGENTA
-}
-
-LEVELS = {
-	"ERROR",
-	"WARNING",
-	"SUCCESS",
-	"DEBUG",
-	"INFO",
-	"NOTE"
 }
 
 PREFIXES = {
@@ -64,14 +58,21 @@ TRACE = {
 	Trace.CALLER: False
 }
 
-ENABLE_LOGS = True
-ENABLE_TRACE = False
-ENABLE_COLOUR = True
+class Enable(Enum):
+	LOGS = 0
+	TRACE = 1
+	COLOUR = 2
+
+ENABLE = {
+	Enable.LOGS:   True,
+	Enable.TRACE:  False,
+	Enable.COLOUR: True
+}
 
 # ===================== INTERNAL FUNCTIONS ===================== #
 
 def __trace():
-	if not ENABLE_TRACE:
+	if not ENABLE[Enable.TRACE]:
 		return ""
 
 	stack = inspect.stack()
@@ -92,31 +93,29 @@ def __trace():
 	return "{}{}{} ".format(file, line, caller)
 
 def __prefix(level):
-	if ENABLE_COLOUR:
+	if ENABLE[Enable.COLOUR]:
 		return "{}{}{} ".format(COLOURS[level], PREFIXES[level], colours.RESET)
 	else:
 		return "{} ".format(PREFIXES[level])
 
 
 def __format(level, message):
-	if SUPPRESSED[level] or not ENABLE_LOGS:
+	if SUPPRESSED[level] or not ENABLE[Enable.LOGS]:
 		return ""
 	else:
 		return "{}{}{}\r\n".format(__prefix(level), __trace(), str(message))
 
 def __invalid(level):
 	print("'{}' is an invalid log level".format(level))
-	print("Valid log levels: {}".format(LEVELS))
+	print("Valid log levels: {}".format(Level.list()))
 
 # ===================== LOGGING API ===================== #
 
 def enable():
-	global ENABLE_LOGS
-	ENABLE_LOGS = True
+	ENABLE[Enable.LOGS] = True
 
 def disable():
-	global ENABLE_LOGS
-	ENABLE_LOGS = False
+	ENABLE[Enable.LOGS]= False
 
 def suppress(level):
 	if level in Level:
@@ -133,23 +132,20 @@ def show(level):
 		raise Exception("Invalid log level")
 
 def colourize():
-	global ENABLE_COLOUR
-	ENABLE_COLOUR = True
+	ENABLE[Enable.COLOUR] = True
 
 def colourless():
-	global ENABLE_COLOUR
-	ENABLE_COLOUR = False
+	ENABLE[Enable.COLOUR] = False
 
 def trace(file, line, caller):
 	TRACE[Trace.FILE] = file
 	TRACE[Trace.LINE] = line
 	TRACE[Trace.CALLER] = caller
 
-	global ENABLE_TRACE
 	if file or line or caller:
-		ENABLE_TRACE = True
+		ENABLE[Enable.TRACE] = True
 	else:
-		ENABLE_TRACE = False
+		ENABLE[Enable.TRACE] = False
 
 def error(message):
 	print(__format(Level.ERROR, message), end = "")
