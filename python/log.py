@@ -16,10 +16,10 @@ def success(message):
 	print("{}{}{} {}".format(GREEN, "~", RESET, str(message)))
 
 def debug(message):
-	print("{}{}{} {}".format(BLUE, "#", RESET, str(message)))
+	print("{}{}{} {}".format(CYAN, "#", RESET, str(message)))
 
 def info(message):
-	print("{}{}{} {}".format(CYAN, ">", RESET, str(message)))
+	print("{}{}{} {}".format(BLUE, ">", RESET, str(message)))
 
 def note(message):
 	print("{}{}{} {}".format(MAGENTA, "@", RESET, str(message)))
