@@ -12,8 +12,8 @@
 #define ERROR_COLOUR     RED
 #define WARNING_COLOUR   YELLOW
 #define SUCCESS_COLOUR   GREEN
-#define DEBUG_COLOUR     BLUE
-#define INFO_COLOUR      CYAN
+#define DEBUG_COLOUR     CYAN
+#define INFO_COLOUR      BLUE
 #define NOTE_COLOUR      MAGENTA
 
 #define ERROR_PREFIX     "X"

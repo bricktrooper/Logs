@@ -22,8 +22,8 @@ COLOURS = {
 	Level.ERROR:   colours.RED,
 	Level.WARNING: colours.YELLOW,
 	Level.SUCCESS: colours.GREEN,
-	Level.DEBUG:   colours.BLUE,
-	Level.INFO:    colours.CYAN,
+	Level.DEBUG:   colours.CYAN,
+	Level.INFO:    colours.BLUE,
 	Level.NOTE:    colours.MAGENTA
 }
 

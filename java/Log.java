@@ -8,8 +8,8 @@ class Log
 	private static final String ERROR_COLOUR = Colours.RED;
 	private static final String WARNING_COLOUR = Colours.YELLOW;
 	private static final String SUCCESS_COLOUR = Colours.GREEN;
-	private static final String DEBUG_COLOUR   = Colours.BLUE;
-	private static final String INFO_COLOUR    = Colours.CYAN;
+	private static final String DEBUG_COLOUR   = Colours.CYAN;
+	private static final String INFO_COLOUR    = Colours.BLUE;
 	private static final String NOTE_COLOUR    = Colours.MAGENTA;
 
 	private static final String ERROR_PREFIX   = "X";
