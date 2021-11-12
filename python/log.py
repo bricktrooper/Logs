@@ -33,24 +33,24 @@ def show(level):
 
 def error(message):
 	if not SUPPRESSED[Level.ERROR]:
-		print("{}{}{} {}".format(RED, "X", RESET, str(message)))
+		print(f"{RED}X{RESET} {message}")
 
 def warning(message):
 	if not SUPPRESSED[Level.WARNING]:
-		print("{}{}{} {}".format(YELLOW, "!", RESET, str(message)))
+		print(f"{YELLOW}!{RESET} {message}")
 
 def success(message):
 	if not SUPPRESSED[Level.SUCCESS]:
-		print("{}{}{} {}".format(GREEN, "~", RESET, str(message)))
+		print(f"{GREEN}~{RESET} {message}")
 
 def debug(message):
 	if not SUPPRESSED[Level.DEBUG]:
-		print("{}{}{} {}".format(CYAN, "#", RESET, str(message)))
+		print(f"{CYAN}#{RESET} {message}")
 
 def info(message):
 	if not SUPPRESSED[Level.INFO]:
-		print("{}{}{} {}".format(BLUE, ">", RESET, str(message)))
+		print(f"{BLUE}>{RESET} {message}")
 
 def note(message):
 	if not SUPPRESSED[Level.NOTE]:
-		print("{}{}{} {}".format(MAGENTA, "@", RESET, str(message)))
+		print(f"{MAGENTA}@{RESET} {message}")
