@@ -15,7 +15,9 @@
 
 #define __log_print(colour, prefix, message)   do { printf(colour "%s " RESET, prefix); printf(message); printf("\r\n"); } while (0)
 
-#ifndef LOG_DISABLE
+#define COMPILE_LOGS   // comment out this line exclude logs from compilation
+
+#ifdef COMPILE_LOGS
 #define log_error(...)     __log_print(RED, "X", __VA_ARGS__)
 #define log_warning(...)   __log_print(YELLOW, "!", __VA_ARGS__)
 #define log_success(...)   __log_print(GREEN, "~", __VA_ARGS__)
