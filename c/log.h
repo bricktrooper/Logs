@@ -1,17 +1,27 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <stdbool.h>
+#include <stdio.h>
 
-#define COMPILE_LOGS     true   // set to false to exclude logs from compilation
+#define BLACK     "\033[0;30m"
+#define RED       "\033[0;31m"
+#define GREEN     "\033[0;32m"
+#define YELLOW    "\033[0;33m"
+#define BLUE      "\033[0;34m"
+#define MAGENTA   "\033[0;35m"
+#define CYAN      "\033[0;36m"
+#define WHITE     "\033[0;37m"
+#define RESET     "\033[0m"
 
-#if COMPILE_LOGS
-#define log_error(...)     log_print(__FILE__, __LINE__, __func__, LOG_ERROR, __VA_ARGS__)
-#define log_warning(...)   log_print(__FILE__, __LINE__, __func__, LOG_WARNING, __VA_ARGS__)
-#define log_success(...)   log_print(__FILE__, __LINE__, __func__, LOG_SUCCESS, __VA_ARGS__)
-#define log_debug(...)     log_print(__FILE__, __LINE__, __func__, LOG_DEBUG, __VA_ARGS__)
-#define log_info(...)      log_print(__FILE__, __LINE__, __func__, LOG_INFO, __VA_ARGS__)
-#define log_note(...)      log_print(__FILE__, __LINE__, __func__, LOG_NOTE, __VA_ARGS__)
+#define __log_print(colour, prefix, message)   do { printf(colour "%s " RESET, prefix); printf(message); printf("\r\n"); } while (0)
+
+#ifndef LOG_DISABLE
+#define log_error(...)     __log_print(RED, "X", __VA_ARGS__)
+#define log_warning(...)   __log_print(YELLOW, "!", __VA_ARGS__)
+#define log_success(...)   __log_print(GREEN, "~", __VA_ARGS__)
+#define log_debug(...)     __log_print(CYAN, "#", __VA_ARGS__)
+#define log_info(...)      __log_print(BLUE, ">", __VA_ARGS__)
+#define log_note(...)      __log_print(MAGENTA, "@", __VA_ARGS__)
 #else
 #define log_error(...)
 #define log_warning(...)
@@ -20,28 +30,5 @@
 #define log_info(...)
 #define log_note(...)
 #endif
-
-enum LogLevel
-{
-	LOG_ERROR,
-	LOG_WARNING,
-	LOG_SUCCESS,
-	LOG_DEBUG,
-	LOG_INFO,
-	LOG_NOTE,
-
-	NUM_LOG_LEVELS
-};
-
-typedef enum LogLevel LogLevel;
-
-void log_enable(void);
-void log_disable(void);
-void log_suppress(LogLevel level);
-void log_show(LogLevel level);
-void log_colourize(void);
-void log_colourless(void);
-void log_trace(bool file, bool line, bool caller);
-void log_print(char const * file, int line, char const * caller, LogLevel level, char const * format, ...) __attribute__ ((format (printf, 5, 6)));
 
 #endif /* LOG_H */

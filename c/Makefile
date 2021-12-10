@@ -1,5 +1,5 @@
-demo: demo.c log.c log.h colours.h
-	clang demo.c log.c -o demo
+demo: demo.c log.h
+	clang demo.c -o demo
 
 clean:
 	rm -f *.o demo
