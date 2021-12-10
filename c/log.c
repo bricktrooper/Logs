@@ -147,9 +147,9 @@ void log_print(char const * file, int line, char const * caller, LogLevel level,
 	}
 
 	va_list args;
-    va_start(args, format);
+	va_start(args, format);
 	vprintf(format, args);
-    va_end(args);
+	va_end(args);
 
 	printf("\r\n");
 }
