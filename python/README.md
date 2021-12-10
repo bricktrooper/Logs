@@ -10,8 +10,3 @@ debug(message)
 info(message)
 note(message)
 ```
-
-```
-suppress(level)
-show(level)
-```
