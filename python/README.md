@@ -45,11 +45,11 @@ enable()
 disable()
 ```
 
-The file, line number, and calling function of log prints can be traced.
+The file, line number, calling function, and module of log prints can be traced.
 By default, tracing is disabled.  It can be enabled using the boolean arguments of the following function:
 
 ```
-trace(file, line, caller)
+trace(module, file, line, caller)
 ```
 
 ### Example
@@ -61,7 +61,7 @@ The following example can be found in `demo.py`
 ```
 import log
 
-log.trace(file = False, line = False, caller = True)
+log.trace(file = False, line = False, caller = True, module = True)
 
 def test():
 	log.error("ERROR")
@@ -80,10 +80,10 @@ log.note("NOTE")
 #### Output
 
 ```
-X test: ERROR
-! test: WARNING
-~ test: SUCCESS
-> __main__: INFO
-# __main__: DEBUG
-@ __main__: NOTE
+X test:[log.log] ERROR
+! test:[log.log] WARNING
+~ test:[log.log] SUCCESS
+> __main__:[log.log] INFO
+# __main__:[log.log] DEBUG
+@ __main__:[log.log] NOTE
 ```

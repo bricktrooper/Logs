@@ -51,11 +51,13 @@ class Trace(Enum):
 	FILE = 0
 	LINE = 1
 	CALLER = 2
+	MODULE = 3
 
 TRACE = {
 	Trace.FILE:   False,
 	Trace.LINE:   False,
-	Trace.CALLER: False
+	Trace.CALLER: False,
+	Trace.MODULE: False
 }
 
 class Enable(Enum):
@@ -79,6 +81,7 @@ def __trace():
 	file = ""
 	line = ""
 	caller = ""
+	module = ""
 
 	if TRACE[Trace.FILE]:
 		file = f"{str(stack[4][1])}:"
@@ -89,8 +92,10 @@ def __trace():
 		if caller == "<module>":
 			caller = "__main__"
 		caller = f"{caller}:"
+	if TRACE[Trace.MODULE]:
+		module = f"[{__name__}]"
 
-	return f"{file}{line}{caller} "
+	return f"{file}{line}{caller}{module} "
 
 def __prefix(level):
 	if ENABLE[Enable.COLOUR]:
@@ -116,7 +121,7 @@ def enable():
 	ENABLE[Enable.LOGS] = True
 
 def disable():
-	ENABLE[Enable.LOGS]= False
+	ENABLE[Enable.LOGS] = False
 
 def suppress(level):
 	if level in Level:
@@ -138,12 +143,13 @@ def colourize():
 def colourless():
 	ENABLE[Enable.COLOUR] = False
 
-def trace(file, line, caller):
+def trace(file = False, line = False, caller = False, module = False):
 	TRACE[Trace.FILE] = file
 	TRACE[Trace.LINE] = line
 	TRACE[Trace.CALLER] = caller
+	TRACE[Trace.MODULE] = module
 
-	if file or line or caller:
+	if file or line or caller or module:
 		ENABLE[Enable.TRACE] = True
 	else:
 		ENABLE[Enable.TRACE] = False
