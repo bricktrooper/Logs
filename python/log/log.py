@@ -1,6 +1,6 @@
-import colours
 import inspect
 
+from . import colours
 from enum import Enum
 
 # ===================== LEVELS ===================== #
@@ -81,33 +81,34 @@ def __trace():
 	caller = ""
 
 	if TRACE[Trace.FILE]:
-		file = str(stack[3][1]) + ":"
+		file = f"{str(stack[4][1])}:"
 	if TRACE[Trace.LINE]:
-		line = str(stack[3][2]) + ":"
+		line = f"{str(stack[4][2])}:"
 	if TRACE[Trace.CALLER]:
-		caller = str(stack[3][3])
+		caller = str(stack[4][3])
 		if caller == "<module>":
 			caller = "__main__"
-		caller += ":"
+		caller = f"{caller}:"
 
-	return "{}{}{} ".format(file, line, caller)
+	return f"{file}{line}{caller} "
 
 def __prefix(level):
 	if ENABLE[Enable.COLOUR]:
-		return "{}{}{} ".format(COLOURS[level], PREFIXES[level], colours.RESET)
+		return f"{COLOURS[level]}{PREFIXES[level]}{colours.RESET} "
 	else:
-		return "{} ".format(PREFIXES[level])
-
+		return f"{PREFIXES[level]} "
 
 def __format(level, message):
-	if SUPPRESSED[level] or not ENABLE[Enable.LOGS]:
-		return ""
-	else:
-		return "{}{}{}\r\n".format(__prefix(level), __trace(), str(message))
+	return f"{__prefix(level)}{__trace()}{str(message)}\r\n"
 
 def __invalid(level):
-	print("'{}' is an invalid log level".format(level))
-	print("Valid log levels: {}".format(Level.list()))
+	print(f"'{level}' is an invalid log level")
+	print(f"Valid log levels: {Level.list()}")
+
+def __print(level, message):
+	if SUPPRESSED[level] or not ENABLE[Enable.LOGS]:
+		return
+	print(__format(level, message), end = "")
 
 # ===================== LOGGING API ===================== #
 
@@ -148,19 +149,19 @@ def trace(file, line, caller):
 		ENABLE[Enable.TRACE] = False
 
 def error(message):
-	print(__format(Level.ERROR, message), end = "")
+	__print(Level.ERROR, message)
 
 def warning(message):
-	print(__format(Level.WARNING, message), end = "")
+	__print(Level.WARNING, message)
 
 def success(message):
-	print(__format(Level.SUCCESS, message), end = "")
+	__print(Level.SUCCESS, message)
 
 def debug(message):
-	print(__format(Level.DEBUG, message), end = "")
+	__print(Level.DEBUG, message)
 
 def info(message):
-	print(__format(Level.INFO, message), end = "")
+	__print(Level.INFO, message)
 
 def note(message):
-	print(__format(Level.NOTE, message), end = "")
+	__print(Level.NOTE, message)
