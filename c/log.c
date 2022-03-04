@@ -72,7 +72,7 @@ void log_disable(void)
 	ENABLE_LOGS = false;
 }
 
-void log_suppress(LogLevel level)
+void log_suppress(Log_Level level)
 {
 	if (level < NUM_LOG_LEVELS)
 	{
@@ -80,7 +80,7 @@ void log_suppress(LogLevel level)
 	}
 }
 
-void log_show(LogLevel level)
+void log_show(Log_Level level)
 {
 	if (level < NUM_LOG_LEVELS)
 	{
@@ -107,7 +107,7 @@ void log_trace(bool file, bool line, bool caller)
 	ENABLE_TRACE = file || line || caller;
 }
 
-void log_print(char const * file, int line, char const * caller, LogLevel level, char const * format, ...)
+void log_print(char const * file, int line, char const * caller, Log_Level level, char const * format, ...)
 {
 	if (format == NULL || caller == NULL || file == NULL || level >= NUM_LOG_LEVELS)
 	{

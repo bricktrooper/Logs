@@ -21,7 +21,7 @@
 #define log_note(...)
 #endif
 
-enum LogLevel
+enum Log_Level
 {
 	LOG_ERROR,
 	LOG_WARNING,
@@ -33,15 +33,15 @@ enum LogLevel
 	NUM_LOG_LEVELS
 };
 
-typedef enum LogLevel LogLevel;
+typedef enum Log_Level Log_Level;
 
 void log_enable(void);
 void log_disable(void);
-void log_suppress(LogLevel level);
-void log_show(LogLevel level);
+void log_suppress(Log_Level level);
+void log_show(Log_Level level);
 void log_colourize(void);
 void log_colourless(void);
 void log_trace(bool file, bool line, bool caller);
-void log_print(char const * file, int line, char const * caller, LogLevel level, char const * format, ...) __attribute__ ((format (printf, 5, 6)));
+void log_print(char const * file, int line, char const * caller, Log_Level level, char const * format, ...) __attribute__((format (printf, 5, 6)));
 
 #endif /* LOG_H */
