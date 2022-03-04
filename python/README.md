@@ -80,10 +80,10 @@ log.note("NOTE")
 #### Output
 
 ```
-X test:[log.log] ERROR
-! test:[log.log] WARNING
-~ test:[log.log] SUCCESS
-> __main__:[log.log] INFO
-# __main__:[log.log] DEBUG
-@ __main__:[log.log] NOTE
+X test:[__main__] ERROR
+! test:[__main__] WARNING
+~ test:[__main__] SUCCESS
+> <module>:[__main__] INFO
+# <module>:[__main__] DEBUG
+@ <module>:[__main__] NOTE
 ```

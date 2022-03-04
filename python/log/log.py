@@ -73,6 +73,8 @@ ENABLE = {
 
 # ===================== INTERNAL FUNCTIONS ===================== #
 
+STACK_DEPTH = 4
+
 def __trace():
 	if not ENABLE[Enable.TRACE]:
 		return ""
@@ -84,16 +86,13 @@ def __trace():
 	module = ""
 
 	if TRACE[Trace.FILE]:
-		file = f"{str(stack[4][1])}:"
+		file = f"{stack[STACK_DEPTH].filename}:"
 	if TRACE[Trace.LINE]:
-		line = f"{str(stack[4][2])}:"
+		line = f"{stack[STACK_DEPTH].lineno}:"
 	if TRACE[Trace.CALLER]:
-		caller = str(stack[4][3])
-		if caller == "<module>":
-			caller = "__main__"
-		caller = f"{caller}:"
+		caller = f"{stack[STACK_DEPTH].function}:"
 	if TRACE[Trace.MODULE]:
-		module = f"[{__name__}]"
+		module = f"[{stack[STACK_DEPTH].frame.f_globals['__name__']}]"
 
 	return f"{file}{line}{caller}{module} "
 
