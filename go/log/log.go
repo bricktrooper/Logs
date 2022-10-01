@@ -14,11 +14,8 @@ func Log(level LogLevel, v ...interface{}) {
 	logElements := []interface{}{}
 
 	timeFormat := strings.TrimSpace(fmt.Sprintf("[%s]", time.Now().Format(TIME_FORMAT)))
-	if timeFormat != "" {
-		logElements = append(logElements, timeFormat)
-	}
 
-	prefixFormat := strings.TrimSpace(level.Colour.WrapText(level.Prefix))
+	prefixFormat := strings.TrimSpace(level.Prefix)
 	if prefixFormat != "" {
 		logElements = append(logElements, prefixFormat)
 	}
@@ -29,13 +26,13 @@ func Log(level LogLevel, v ...interface{}) {
 		logElements = append(logElements, traceFormat)
 	}
 
-	messageFormat := strings.TrimSpace(level.Colour.WrapText(v...))
+	messageFormat := strings.TrimSpace(fmt.Sprint(v...))
 	if messageFormat != "" {
 		logElements = append(logElements, messageFormat)
 	}
 
 	if !level.Suppressed {
-		fmt.Fprintln(level.File, logElements...)
+		fmt.Fprintln(level.File, timeFormat, level.Colour.WrapText(logElements...))
 	}
 }
 
