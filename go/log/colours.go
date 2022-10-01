@@ -2,7 +2,6 @@ package log
 
 import (
 	"fmt"
-	"strings"
 )
 
 type Colour string
@@ -19,16 +18,10 @@ const (
 	ColourReset   Colour = "\033[0m"
 )
 
-func (colour *Colour) WrapText(v ...interface{}) string {
-	sliceStr := make([]string, len(v))
-	for i := range v {
-		sliceStr[i] = fmt.Sprint(v[i])
-	}
-	joinedStr := strings.Join(sliceStr, " ")
-
+func (colour *Colour) WrapText(text string) string {
 	if ENABLE_COLOUR {
-		return fmt.Sprintf("%s%s%s", *colour, joinedStr, ColourReset)
+		return fmt.Sprintf("%s%s%s", *colour, text, ColourReset)
 	}
 
-	return joinedStr
+	return text
 }

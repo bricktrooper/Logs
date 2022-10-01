@@ -6,6 +6,15 @@ import (
 	"time"
 )
 
+func GetCommaSeparatedString(v ...interface{}) string {
+	s := make([]string, len(v))
+	for i := range v {
+		s[i] = fmt.Sprint(v[i])
+	}
+
+	return strings.Join(s, " ")
+}
+
 func Log(level LogLevel, v ...interface{}) {
 	if !ENABLE_LOGGING {
 		return
@@ -26,13 +35,15 @@ func Log(level LogLevel, v ...interface{}) {
 		logElements = append(logElements, traceFormat)
 	}
 
-	messageFormat := strings.TrimSpace(fmt.Sprint(v...))
+	messageFormat := strings.TrimSpace(GetCommaSeparatedString(v...))
 	if messageFormat != "" {
 		logElements = append(logElements, messageFormat)
 	}
 
+	logMessage := GetCommaSeparatedString(logElements...)
+
 	if !level.Suppressed {
-		fmt.Fprintln(level.File, timeFormat, level.Colour.WrapText(logElements...))
+		fmt.Fprintln(level.File, timeFormat, level.Colour.WrapText(logMessage))
 	}
 }
 
