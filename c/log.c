@@ -9,41 +9,43 @@
 
 // ===================== CONSTANTS ===================== //
 
-#define ERROR_COLOUR     RED
-#define WARNING_COLOUR   YELLOW
-#define SUCCESS_COLOUR   GREEN
-#define DEBUG_COLOUR     CYAN
-#define INFO_COLOUR      BLUE
-#define NOTE_COLOUR      MAGENTA
+#define NEWLINE   "\r\n"
 
-#define ERROR_PREFIX     "X"
-#define WARNING_PREFIX   "!"
-#define SUCCESS_PREFIX   "~"
-#define DEBUG_PREFIX     "#"
-#define INFO_PREFIX      ">"
-#define NOTE_PREFIX      "@"
+#define COLOUR_ERROR     RED
+#define COLOUR_WARNING   YELLOW
+#define COLOUR_SUCCESS   GREEN
+#define COLOUR_DEBUG     CYAN
+#define COLOUR_INFO      BLUE
+#define COLOUR_NOTE      MAGENTA
 
-static char const * PREFIXES [NUM_LOG_LEVELS] = {
-	ERROR_PREFIX,
-	WARNING_PREFIX,
-	SUCCESS_PREFIX,
-	DEBUG_PREFIX,
-	INFO_PREFIX,
-	NOTE_PREFIX
+#define PREFIX_ERROR     "X"
+#define PREFIX_WARNING   "!"
+#define PREFIX_SUCCESS   "~"
+#define PREFIX_DEBUG     "#"
+#define PREFIX_INFO      ">"
+#define PREFIX_NOTE      "@"
+
+static char const * prefixes [NUM_LOG_LEVELS] = {
+	PREFIX_ERROR,
+	PREFIX_WARNING,
+	PREFIX_SUCCESS,
+	PREFIX_DEBUG,
+	PREFIX_INFO,
+	PREFIX_NOTE
 };
 
-static char const * COLOURS [NUM_LOG_LEVELS] = {
-	ERROR_COLOUR,
-	WARNING_COLOUR,
-	SUCCESS_COLOUR,
-	DEBUG_COLOUR,
-	INFO_COLOUR,
-	NOTE_COLOUR
+static char const * colours [NUM_LOG_LEVELS] = {
+	COLOUR_ERROR,
+	COLOUR_WARNING,
+	COLOUR_SUCCESS,
+	COLOUR_DEBUG,
+	COLOUR_INFO,
+	COLOUR_NOTE
 };
 
 // ===================== FLAGS ===================== //
 
-static bool SUPPRESSED [NUM_LOG_LEVELS] = {
+static bool suppressed [NUM_LOG_LEVELS] = {
 	false,
 	false,
 	false,
@@ -52,31 +54,31 @@ static bool SUPPRESSED [NUM_LOG_LEVELS] = {
 	false
 };
 
-static bool TRACE_FILE = false;
-static bool TRACE_LINE = false;
-static bool TRACE_CALLER = false;
+static bool trace_file = false;
+static bool trace_line = false;
+static bool trace_caller = false;
 
-static bool ENABLE_LOGS = true;
-static bool ENABLE_TRACE = false;
-static bool ENABLE_COLOUR = true;
+static bool enable = true;
+static bool trace = false;
+static bool colourize = true;
 
 // ===================== LOGGING API ===================== //
 
 void log_enable(void)
 {
-	ENABLE_LOGS = true;
+	enable = true;
 }
 
 void log_disable(void)
 {
-	ENABLE_LOGS = false;
+	enable = false;
 }
 
 void log_suppress(Log_Level level)
 {
 	if (level < NUM_LOG_LEVELS)
 	{
-		SUPPRESSED[level] = true;
+		suppressed[level] = true;
 	}
 }
 
@@ -84,27 +86,27 @@ void log_show(Log_Level level)
 {
 	if (level < NUM_LOG_LEVELS)
 	{
-		SUPPRESSED[level] = false;
+		suppressed[level] = false;
 	}
 }
 
 void log_colourize(void)
 {
-	ENABLE_COLOUR = true;
+	colourize = true;
 }
 
 void log_colourless(void)
 {
-	ENABLE_COLOUR = false;
+	colourize = false;
 }
 
 void log_trace(bool file, bool line, bool caller)
 {
-	TRACE_FILE = file;
-	TRACE_LINE = line;
-	TRACE_CALLER = caller;
+	trace_file = file;
+	trace_line = line;
+	trace_caller = caller;
 
-	ENABLE_TRACE = file || line || caller;
+	trace = file || line || caller;
 }
 
 void log_print(char const * file, int line, char const * caller, Log_Level level, char const * format, ...)
@@ -114,31 +116,31 @@ void log_print(char const * file, int line, char const * caller, Log_Level level
 		return;
 	}
 
-	if (SUPPRESSED[level] || !ENABLE_LOGS)
+	if (suppressed[level] || !enable)
 	{
 		return;
 	}
 
-	if (ENABLE_COLOUR)
+	if (colourize)
 	{
-		printf("%s", COLOURS[level]);
+		printf("%s", colours[level]);
 	}
 
-	printf("%s" RESET " ", PREFIXES[level]);
+	printf("%s " RESET, prefixes[level]);
 
-	if (ENABLE_TRACE)
+	if (trace)
 	{
-		if (TRACE_FILE)
+		if (trace_file)
 		{
 			printf("%s:", file);
 		}
 
-		if (TRACE_LINE)
+		if (trace_line)
 		{
 			printf("%d:", line);
 		}
 
-		if (TRACE_CALLER)
+		if (trace_caller)
 		{
 			printf("%s:", caller);
 		}
@@ -151,5 +153,5 @@ void log_print(char const * file, int line, char const * caller, Log_Level level
 	vprintf(format, args);
 	va_end(args);
 
-	printf("\r\n");
+	printf(NEWLINE);
 }
