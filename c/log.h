@@ -13,17 +13,19 @@
 #define WHITE     "\033[0;37m"
 #define RESET     "\033[0m"
 
-#define __log_print(colour, prefix, message)   do { printf(colour "%s " RESET, prefix); printf(message); printf("\r\n"); } while (0)
+#define NEWLINE "\r\n"
+
+#define __log_print(format, ...)   printf(format, ##__VA_ARGS__)
 
 #define COMPILE_LOGS   // comment out this line exclude logs from compilation
 
 #ifdef COMPILE_LOGS
-#define log_error(...)     __log_print(RED, "X", __VA_ARGS__)
-#define log_warning(...)   __log_print(YELLOW, "!", __VA_ARGS__)
-#define log_success(...)   __log_print(GREEN, "~", __VA_ARGS__)
-#define log_debug(...)     __log_print(CYAN, "#", __VA_ARGS__)
-#define log_info(...)      __log_print(BLUE, ">", __VA_ARGS__)
-#define log_note(...)      __log_print(MAGENTA, "@", __VA_ARGS__)
+#define log_error(format, ...)     __log_print(RED     "X " RESET format NEWLINE, ##__VA_ARGS__)
+#define log_warning(format, ...)   __log_print(YELLOW  "! " RESET format NEWLINE, ##__VA_ARGS__)
+#define log_success(format, ...)   __log_print(GREEN   "~ " RESET format NEWLINE, ##__VA_ARGS__)
+#define log_debug(format, ...)     __log_print(CYAN    "# " RESET format NEWLINE, ##__VA_ARGS__)
+#define log_info(format, ...)      __log_print(BLUE    "> " RESET format NEWLINE, ##__VA_ARGS__)
+#define log_note(format, ...)      __log_print(MAGENTA "@ " RESET format NEWLINE, ##__VA_ARGS__)
 #else
 #define log_error(...)
 #define log_warning(...)
