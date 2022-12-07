@@ -13,10 +13,10 @@ void log_info(char const * format, ...);
 void log_note(char const * format, ...);
 ```
 
-Each log level has an associated `LogLevel` enum:
+Each log level has an associated `Log_Level` enum:
 
 ```
-enum LogLevel
+enum Log_Level
 {
 	LOG_ERROR,
 	LOG_WARNING,
@@ -37,8 +37,8 @@ void log_colourize(void);
 Each log level can be individually suppressed:
 
 ```
-void log_suppress(LogLevel level);
-void log_show(LogLevel level);
+void log_suppress(Log_Level level);
+void log_show(Log_Level level);
 ```
 
 All log printing can be disabled.  This overrides suppressions.  When enabled, suppressions still apply:
