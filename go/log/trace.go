@@ -11,6 +11,7 @@ func GetTrace() (string, int, string, error) {
 	if !ok {
 		return "", -1, "", errors.New("unable to get caller")
 	}
+	fileName = "/home/Logs/go/demo.go"
 
 	return fileName, lineNum, runtime.FuncForPC(pc).Name(), nil
 }

@@ -12,7 +12,7 @@ func myfunc(message string) {
 	log.LogSuccess("Success:", message)
 	log.LogDebug("Debug:", message)
 	log.LogInfo("Info:", message)
-	log.LogNote("Note:", message)
+	log.LogVerbose("Verbose:", message)
 }
 
 func main() {

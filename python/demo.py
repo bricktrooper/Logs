@@ -13,4 +13,4 @@ log.debug("DEBUG")
 
 log.suppress(log.Level.ERROR)
 log.error("ERROR")
-log.note("NOTE")
+log.verbose("VERBOSE")

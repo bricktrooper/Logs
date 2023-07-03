@@ -10,5 +10,5 @@ from .log import warning
 from .log import success
 from .log import debug
 from .log import info
-from .log import note
+from .log import verbose
 from .log import Level

@@ -17,4 +17,4 @@ log_debug "DEBUG"
 
 log_suppress ERROR
 log_error "ERROR"
-log_note "NOTE"
+log_verbose "VERBOSE"

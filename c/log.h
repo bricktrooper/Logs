@@ -11,14 +11,14 @@
 #define log_success(...)   log_print(__FILE__, __LINE__, __func__, LOG_SUCCESS, __VA_ARGS__)
 #define log_debug(...)     log_print(__FILE__, __LINE__, __func__, LOG_DEBUG, __VA_ARGS__)
 #define log_info(...)      log_print(__FILE__, __LINE__, __func__, LOG_INFO, __VA_ARGS__)
-#define log_note(...)      log_print(__FILE__, __LINE__, __func__, LOG_NOTE, __VA_ARGS__)
+#define log_verbose(...)      log_print(__FILE__, __LINE__, __func__, LOG_VERBOSE, __VA_ARGS__)
 #else
 #define log_error(...)
 #define log_warning(...)
 #define log_success(...)
 #define log_debug(...)
 #define log_info(...)
-#define log_note(...)
+#define log_verbose(...)
 #endif
 
 enum Log_Level
@@ -28,7 +28,7 @@ enum Log_Level
 	LOG_SUCCESS,
 	LOG_DEBUG,
 	LOG_INFO,
-	LOG_NOTE,
+	LOG_VERBOSE,
 
 	NUM_LOG_LEVELS
 };

@@ -10,7 +10,7 @@ log.LogWarning(message...)
 log.LogSuccess(message...)
 log.LogDebug(message...)
 log.LogInfo(message...)
-log.LogNote(message...)
+log.LogVerbose(message...)
 ```
 
 Each log level has an associated enum:
@@ -21,7 +21,7 @@ log.LogLevelWarning
 log.LogLevelSuccess
 log.LogLevelDebug
 log.LogLevelInfo
-log.LogLevelNote
+log.LogLevelVerbose
 ```
 
 Each log level has a prefix symbol with a unique ANSI colour.  If your terminal does not support colours, you can disable it:
@@ -81,7 +81,7 @@ func myfunc(message string) {
 	log.LogSuccess("Success:", message)
 	log.LogDebug("Debug:", message)
 	log.LogInfo("Info:", message)
-	log.LogNote("Note:", message)
+	log.LogVerbose("Verbose:", message)
 }
 
 func main() {

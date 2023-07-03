@@ -10,7 +10,7 @@ Log.warning(String format, Object ... args);
 Log.success(String format, Object ... args);
 Log.debug(String format, Object ... args);
 Log.info(String format, Object ... args);
-Log.note(String format, Object ... args);
+Log.verbose(String format, Object ... args);
 ```
 
 Each log level has an associated `Log.Level` enum:
@@ -23,7 +23,7 @@ enum Log.Level
 	SUCCESS,
 	DEBUG,
 	INFO,
-	NOTE
+	VERBOSE
 }
 ```
 
@@ -81,7 +81,7 @@ class Demo
 
 		Log.suppress(Log.Level.ERROR);
 		Log.error("ERROR");
-		Log.note("NOTE");
+		Log.verbose("VERBOSE");
 	}
 }
 ```
@@ -94,5 +94,5 @@ X test: ERROR
 ~ test: SUCCESS
 > main: INFO
 # main: DEBUG
-@ main: NOTE
+@ main: VERBOSE
 ```

@@ -67,6 +67,6 @@ func LogInfo(v ...interface{}) {
 	Log(LogLevelInfo, v...)
 }
 
-func LogNote(v ...interface{}) {
-	Log(LogLevelNote, v...)
+func LogVerbose(v ...interface{}) {
+	Log(LogLevelVerbose, v...)
 }

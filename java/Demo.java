@@ -17,6 +17,6 @@ class Demo
 
 		Log.suppress(Log.Level.ERROR);
 		Log.error("ERROR");
-		Log.note("NOTE");
+		Log.verbose("VERBOSE");
 	}
 }

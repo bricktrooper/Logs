@@ -11,10 +11,10 @@ class Level(Enum):
 	SUCCESS = 2
 	DEBUG = 3
 	INFO = 4
-	NOTE = 5
+	VERBOSE = 5
 
 	def list():
-		return ["Level.ERROR", "Level.WARNING", "Level.SUCCESS", "Level.DEBUG", "Level.INFO", "Level.NOTE"]
+		return ["Level.ERROR", "Level.WARNING", "Level.SUCCESS", "Level.DEBUG", "Level.INFO", "Level.VERBOSE"]
 
 # ===================== CONSTANTS ===================== #
 
@@ -24,7 +24,7 @@ COLOURS = {
 	Level.SUCCESS: colours.GREEN,
 	Level.DEBUG:   colours.CYAN,
 	Level.INFO:    colours.BLUE,
-	Level.NOTE:    colours.MAGENTA
+	Level.VERBOSE:    colours.MAGENTA
 }
 
 PREFIXES = {
@@ -33,7 +33,7 @@ PREFIXES = {
 	Level.SUCCESS: "~",
 	Level.DEBUG:   "#",
 	Level.INFO:    ">",
-	Level.NOTE:    "@"
+	Level.VERBOSE:    "@"
 }
 
 # ===================== FLAGS ===================== #
@@ -44,7 +44,7 @@ SUPPRESSED = {
 	Level.SUCCESS: False,
 	Level.DEBUG:   False,
 	Level.INFO:    False,
-	Level.NOTE:    False
+	Level.VERBOSE:    False
 }
 
 class Trace(Enum):
@@ -168,5 +168,5 @@ def debug(message):
 def info(message):
 	__print(Level.INFO, message)
 
-def note(message):
-	__print(Level.NOTE, message)
+def verbose(message):
+	__print(Level.VERBOSE, message)

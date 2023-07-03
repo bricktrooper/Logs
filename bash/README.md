@@ -10,7 +10,7 @@ log_warning <message>
 log_success <message>
 log_debug <message>
 log_info <message>
-log_note <message>
+log_verbose <message>
 ```
 
 Each log level has an associated string:
@@ -21,7 +21,7 @@ Each log level has an associated string:
 "SUCCESS"
 "DEBUG"
 "INFO"
-"NOTE"
+"VERBOSE"
 ```
 
 Each log level has a prefix symbol with a unique ANSI colour.  If your terminal does not support colours, you can disable it:
@@ -76,7 +76,7 @@ log_debug "DEBUG"
 
 log_suppress ERROR
 log_error "ERROR"
-log_note "NOTE"
+log_verbose "VERBOSE"
 ```
 
 #### Output
@@ -87,5 +87,5 @@ X test: ERROR
 ~ test: SUCCESS
 > main: INFO
 # main: DEBUG
-@ main: NOTE
+@ main: VERBOSE
 ```

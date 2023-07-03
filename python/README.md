@@ -10,7 +10,7 @@ warning(message)
 success(message)
 debug(message)
 info(message)
-note(message)
+verbose(message)
 ```
 
 Each log level has an associated enum:
@@ -21,7 +21,7 @@ log.Level.WARNING
 log.Level.SUCCESS
 log.Level.DEBUG
 log.Level.INFO
-log.Level.NOTE
+log.Level.VERBOSE
 ```
 
 Each log level has a prefix symbol with a unique ANSI colour.  If your terminal does not support colours, you can disable it:
@@ -74,7 +74,7 @@ log.debug("DEBUG")
 
 log.suppress(log.Level.ERROR)
 log.error("ERROR")
-log.note("NOTE")
+log.verbose("VERBOSE")
 ```
 
 #### Output
@@ -85,5 +85,5 @@ X test:[__main__] ERROR
 ~ test:[__main__] SUCCESS
 > <module>:[__main__] INFO
 # <module>:[__main__] DEBUG
-@ <module>:[__main__] NOTE
+@ <module>:[__main__] VERBOSE
 ```

@@ -10,7 +10,7 @@ void log_warning(char const * format, ...);
 void log_success(char const * format, ...);
 void log_debug(char const * format, ...);
 void log_info(char const * format, ...);
-void log_note(char const * format, ...);
+void log_verbose(char const * format, ...);
 ```
 
 Each log level has an associated `Log_Level` enum:
@@ -23,7 +23,7 @@ enum Log_Level
 	LOG_SUCCESS,
 	LOG_DEBUG,
 	LOG_INFO,
-	LOG_NOTE
+	LOG_VERBOSE
 };
 ```
 
@@ -87,7 +87,7 @@ int main(void)
 
 	log_suppress(LOG_ERROR);
 	log_error("ERROR");
-	log_note("NOTE");
+	log_verbose("VERBOSE");
 }
 ```
 
@@ -99,5 +99,5 @@ X test: ERROR
 ~ test: SUCCESS
 > main: INFO
 # main: DEBUG
-@ main: NOTE
+@ main: VERBOSE
 ```

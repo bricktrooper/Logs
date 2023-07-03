@@ -50,8 +50,8 @@ var LogLevelInfo = LogLevel{
 	Suppressed: false,
 }
 
-var LogLevelNote = LogLevel{
-	Name:       "NOTE",
+var LogLevelVerbose = LogLevel{
+	Name:       "VERBOSE",
 	Colour:     ColourMagenta,
 	Prefix:     "@",
 	File:       os.Stdout,

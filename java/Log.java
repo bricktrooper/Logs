@@ -10,14 +10,14 @@ class Log
 	private static final String SUCCESS_COLOUR = Colours.GREEN;
 	private static final String DEBUG_COLOUR   = Colours.CYAN;
 	private static final String INFO_COLOUR    = Colours.BLUE;
-	private static final String NOTE_COLOUR    = Colours.MAGENTA;
+	private static final String VERBOSE_COLOUR    = Colours.MAGENTA;
 
 	private static final String ERROR_PREFIX   = "X";
 	private static final String WARNING_PREFIX = "!";
 	private static final String SUCCESS_PREFIX = "~";
 	private static final String DEBUG_PREFIX   = "#";
 	private static final String INFO_PREFIX    = ">";
-	private static final String NOTE_PREFIX    = "@";
+	private static final String VERBOSE_PREFIX    = "@";
 
 	private static final String [] PREFIXES = {
 		ERROR_PREFIX,
@@ -25,7 +25,7 @@ class Log
 		SUCCESS_PREFIX,
 		DEBUG_PREFIX,
 		INFO_PREFIX,
-		NOTE_PREFIX
+		VERBOSE_PREFIX
 	};
 
 	private static final String [] COLOURS = {
@@ -34,7 +34,7 @@ class Log
 		SUCCESS_COLOUR,
 		DEBUG_COLOUR,
 		INFO_COLOUR,
-		NOTE_COLOUR
+		VERBOSE_COLOUR
 	};
 
 	public enum Level
@@ -44,7 +44,7 @@ class Log
 		SUCCESS,
 		DEBUG,
 		INFO,
-		NOTE,
+		VERBOSE,
 
 		NUM_LEVELS
 	};
@@ -55,7 +55,7 @@ class Log
 		"SUCCESS",
 		"DEBUG",
 		"INFO",
-		"NOTE"
+		"VERBOSE"
 	};
 
 	// ===================== FLAGS ===================== //
@@ -229,8 +229,8 @@ class Log
 		System.out.print(formatMessage(Level.INFO, format, args));
 	}
 
-	public static void note(String format, Object ... args)
+	public static void verbose(String format, Object ... args)
 	{
-		System.out.print(formatMessage(Level.NOTE, format, args));
+		System.out.print(formatMessage(Level.VERBOSE, format, args));
 	}
 }

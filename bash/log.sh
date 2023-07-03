@@ -11,14 +11,14 @@ WARNING_COLOUR=${YELLOW}
 SUCCESS_COLOUR=${GREEN}
 DEBUG_COLOUR=${CYAN}
 INFO_COLOUR=${BLUE}
-NOTE_COLOUR=${MAGENTA}
+VERBOSE_COLOUR=${MAGENTA}
 
 ERROR_PREFIX="X"
 WARNING_PREFIX="!"
 SUCCESS_PREFIX="~"
 DEBUG_PREFIX="#"
 INFO_PREFIX=">"
-NOTE_PREFIX="@"
+VERBOSE_PREFIX="@"
 
 # ===================== FLAGS ===================== #
 
@@ -27,7 +27,7 @@ SUPPRESS_WARNING=$FALSE
 SUPPRESS_SUCCESS=$FALSE
 SUPPRESS_DEBUG=$FALSE
 SUPPRESS_INFO=$FALSE
-SUPPRESS_NOTE=$FALSE
+SUPPRESS_VERBOSE=$FALSE
 
 suppressed()
 {
@@ -214,9 +214,9 @@ log_info()
 	printf "`format_message INFO ${@}`"
 }
 
-log_note()
+log_verbose()
 {
-	printf "`format_message NOTE ${@}`"
+	printf "`format_message VERBOSE ${@}`"
 }
 
 export -f log_error
@@ -224,4 +224,4 @@ export -f log_warning
 export -f log_success
 export -f log_debug
 export -f log_info
-export -f log_note
+export -f log_verbose

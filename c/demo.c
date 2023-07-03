@@ -17,5 +17,5 @@ int main(void)
 
 	log_suppress(LOG_ERROR);
 	log_error("ERROR");
-	log_note("NOTE");
+	log_verbose("VERBOSE");
 }
