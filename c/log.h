@@ -25,14 +25,14 @@
 #define log_success(format, ...)   __log_print(GREEN   "~ " RESET format NEWLINE, ##__VA_ARGS__)
 #define log_debug(format, ...)     __log_print(CYAN    "# " RESET format NEWLINE, ##__VA_ARGS__)
 #define log_info(format, ...)      __log_print(BLUE    "> " RESET format NEWLINE, ##__VA_ARGS__)
-#define log_note(format, ...)      __log_print(MAGENTA "@ " RESET format NEWLINE, ##__VA_ARGS__)
+#define log_verbose(format, ...)      __log_print(MAGENTA "@ " RESET format NEWLINE, ##__VA_ARGS__)
 #else
 #define log_error(...)
 #define log_warning(...)
 #define log_success(...)
 #define log_debug(...)
 #define log_info(...)
-#define log_note(...)
+#define log_verbose(...)
 #endif
 
 #endif /* LOG_H */

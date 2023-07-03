@@ -8,5 +8,5 @@ void log_warning(char const * format, ...);
 void log_success(char const * format, ...);
 void log_debug(char const * format, ...);
 void log_info(char const * format, ...);
-void log_note(char const * format, ...);
+void log_verbose(char const * format, ...);
 ```

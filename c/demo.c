@@ -7,5 +7,5 @@ int main(void)
 	log_success("SUCCESS");
 	log_info("INFO");
 	log_debug("DEBUG");
-	log_note("NOTE");
+	log_verbose("VERBOSE");
 }

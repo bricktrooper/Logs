@@ -8,5 +8,5 @@ warning(message)
 success(message)
 debug(message)
 info(message)
-note(message)
+verbose(message)
 ```
