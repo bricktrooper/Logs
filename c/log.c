@@ -16,14 +16,14 @@
 #define COLOUR_SUCCESS   GREEN
 #define COLOUR_DEBUG     CYAN
 #define COLOUR_INFO      BLUE
-#define COLOUR_VERBOSE      MAGENTA
+#define COLOUR_VERBOSE   MAGENTA
 
 #define PREFIX_ERROR     "X"
 #define PREFIX_WARNING   "!"
 #define PREFIX_SUCCESS   "~"
 #define PREFIX_DEBUG     "#"
 #define PREFIX_INFO      ">"
-#define PREFIX_VERBOSE      "@"
+#define PREFIX_VERBOSE   "@"
 
 static char const * prefixes [NUM_LOG_LEVELS] = {
 	PREFIX_ERROR,

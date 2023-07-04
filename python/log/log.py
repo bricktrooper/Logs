@@ -24,7 +24,7 @@ COLOURS = {
 	Level.SUCCESS: colours.GREEN,
 	Level.DEBUG:   colours.CYAN,
 	Level.INFO:    colours.BLUE,
-	Level.VERBOSE:    colours.MAGENTA
+	Level.VERBOSE: colours.MAGENTA
 }
 
 PREFIXES = {
@@ -33,7 +33,7 @@ PREFIXES = {
 	Level.SUCCESS: "~",
 	Level.DEBUG:   "#",
 	Level.INFO:    ">",
-	Level.VERBOSE:    "@"
+	Level.VERBOSE: "@"
 }
 
 # ===================== FLAGS ===================== #
@@ -44,7 +44,7 @@ SUPPRESSED = {
 	Level.SUCCESS: False,
 	Level.DEBUG:   False,
 	Level.INFO:    False,
-	Level.VERBOSE:    False
+	Level.VERBOSE: False
 }
 
 class Trace(Enum):
