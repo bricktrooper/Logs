@@ -92,9 +92,9 @@ def __trace():
 	if TRACE[Trace.CALLER]:
 		caller = f"{stack[STACK_DEPTH].function}:"
 	if TRACE[Trace.MODULE]:
-		module = f"[{stack[STACK_DEPTH].frame.f_globals['__name__']}]"
+		module = f"[{stack[STACK_DEPTH].frame.f_globals['__name__']}]:"
 
-	return f"{file}{line}{caller}{module} "
+	return f"{module}{file}{line}{caller} "
 
 def __prefix(level):
 	if ENABLE[Enable.COLOUR]:

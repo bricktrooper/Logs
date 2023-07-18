@@ -80,10 +80,10 @@ log.verbose("VERBOSE")
 #### Output
 
 ```
-X test:[__main__] ERROR
-! test:[__main__] WARNING
-~ test:[__main__] SUCCESS
-> <module>:[__main__] INFO
-# <module>:[__main__] DEBUG
-@ <module>:[__main__] VERBOSE
+X [__main__]:test: ERROR
+! [__main__]:test: WARNING
+~ [__main__]:test: SUCCESS
+> [__main__]:<module>: INFO
+# [__main__]:<module>: DEBUG
+@ [__main__]:<module>: VERBOSE
 ```
