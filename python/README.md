@@ -61,7 +61,7 @@ The following example can be found in `demo.py`
 ```
 import log
 
-log.trace(file = False, line = False, caller = True, module = True)
+log.trace(file = False, line = False, caller = True, module = False)
 
 def test():
 	log.error("ERROR")
@@ -80,10 +80,10 @@ log.verbose("VERBOSE")
 #### Output
 
 ```
-X [__main__]:test: ERROR
-! [__main__]:test: WARNING
-~ [__main__]:test: SUCCESS
-> [__main__]:<module>: INFO
-# [__main__]:<module>: DEBUG
-@ [__main__]:<module>: VERBOSE
+X test: ERROR
+! test: WARNING
+~ test: SUCCESS
+> <module>: INFO
+# <module>: DEBUG
+@ <module>: VERBOSE
 ```

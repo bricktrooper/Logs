@@ -27,6 +27,8 @@ COLOURS = {
 	Level.VERBOSE: colours.MAGENTA
 }
 
+COLOUR_TRACE = colours.BLACK
+
 PREFIXES = {
 	Level.ERROR:   "X",
 	Level.WARNING: "!",
@@ -94,7 +96,10 @@ def __trace():
 	if TRACE[Trace.MODULE]:
 		module = f"[{stack[STACK_DEPTH].frame.f_globals['__name__']}]:"
 
-	return f"{module}{file}{line}{caller} "
+	if ENABLE[Enable.COLOUR]:
+		return f"{COLOUR_TRACE}{module}{file}{line}{caller}{colours.RESET} "
+	else:
+		return f"{module}{file}{line}{caller} "
 
 def __prefix(level):
 	if ENABLE[Enable.COLOUR]:

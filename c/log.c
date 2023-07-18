@@ -17,6 +17,7 @@
 #define COLOUR_DEBUG     CYAN
 #define COLOUR_INFO      BLUE
 #define COLOUR_VERBOSE   MAGENTA
+#define COLOUR_TRACE     BLACK
 
 #define PREFIX_ERROR     "X"
 #define PREFIX_WARNING   "!"
@@ -109,7 +110,7 @@ void log_trace(bool file, bool line, bool caller)
 	trace = file || line || caller;
 }
 
-void log_print(char const * file, int line, char const * caller, Log_Level level, char const * format, ...)
+void log_print(char const * file, unsigned int line, char const * caller, Log_Level level, char const * format, ...)
 {
 	if (format == NULL || caller == NULL || file == NULL || level >= NUM_LOG_LEVELS)
 	{
@@ -121,15 +122,13 @@ void log_print(char const * file, int line, char const * caller, Log_Level level
 		return;
 	}
 
-	if (colourize)
-	{
-		printf("%s", colours[level]);
-	}
-
-	printf("%s " RESET, prefixes[level]);
-
 	if (trace)
 	{
+		if (colourize)
+		{
+			printf("%s", COLOUR_TRACE);
+		}
+
 		if (trace_file)
 		{
 			printf("%s:", file);
@@ -147,6 +146,12 @@ void log_print(char const * file, int line, char const * caller, Log_Level level
 
 		printf(" ");
 	}
+
+	printf("%s%s%s ",
+		colourize ? colours[level] : "",
+		prefixes[level],
+		colourize ? RESET : ""
+	);
 
 	va_list args;
 	va_start(args, format);

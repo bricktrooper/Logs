@@ -6,19 +6,20 @@ TRUE=0
 
 # ===================== CONSTANTS ===================== #
 
-ERROR_COLOUR=${RED}
-WARNING_COLOUR=${YELLOW}
-SUCCESS_COLOUR=${GREEN}
-DEBUG_COLOUR=${CYAN}
-INFO_COLOUR=${BLUE}
-VERBOSE_COLOUR=${MAGENTA}
+COLOUR_ERROR=${RED}
+COLOUR_WARNING=${YELLOW}
+COLOUR_SUCCESS=${GREEN}
+COLOUR_DEBUG=${CYAN}
+COLOUR_INFO=${BLUE}
+COLOUR_VERBOSE=${MAGENTA}
+COLOUR_TRACE=${BLACK}
 
-ERROR_PREFIX="X"
-WARNING_PREFIX="!"
-SUCCESS_PREFIX="~"
-DEBUG_PREFIX="#"
-INFO_PREFIX=">"
-VERBOSE_PREFIX="@"
+PREFIX_ERROR="X"
+PREFIX_WARNING="!"
+PREFIX_SUCCESS="~"
+PREFIX_DEBUG="#"
+PREFIX_INFO=">"
+PREFIX_VERBOSE="@"
 
 # ===================== FLAGS ===================== #
 
@@ -87,14 +88,19 @@ get_trace()
 		CALLER="${CALLER}:"
 	fi
 
-	echo "${FILE}${LINE}${CALLER} "
+	if enabled COLOUR
+	then
+		echo "${COLOUR_TRACE}${FILE}${LINE}${CALLER}${RESET} "
+	else
+		echo "${FILE}${LINE}${CALLER} "
+	fi
 }
 
 get_prefix()
 {
 	local LEVEL=${1}
-	local COLOUR=${LEVEL}_COLOUR
-	local PREFIX=${LEVEL}_PREFIX
+	local COLOUR=COLOUR_${LEVEL}
+	local PREFIX=PREFIX_${LEVEL}
 
 	if enabled COLOUR
 	then

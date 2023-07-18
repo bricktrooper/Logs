@@ -1,6 +1,6 @@
 import log
 
-log.trace(file = False, line = False, caller = True, module = True)
+log.trace(file = False, line = False, caller = True, module = False)
 
 def test():
 	log.error("ERROR")

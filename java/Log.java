@@ -5,36 +5,37 @@ import java.lang.StackTraceElement;
 
 class Log
 {
-	private static final String ERROR_COLOUR   = Colours.RED;
-	private static final String WARNING_COLOUR = Colours.YELLOW;
-	private static final String SUCCESS_COLOUR = Colours.GREEN;
-	private static final String DEBUG_COLOUR   = Colours.CYAN;
-	private static final String INFO_COLOUR    = Colours.BLUE;
-	private static final String VERBOSE_COLOUR = Colours.MAGENTA;
+	private static final String COLOUR_ERROR   = Colours.RED;
+	private static final String COLOUR_WARNING = Colours.YELLOW;
+	private static final String COLOUR_SUCCESS = Colours.GREEN;
+	private static final String COLOUR_DEBUG   = Colours.CYAN;
+	private static final String COLOUR_INFO    = Colours.BLUE;
+	private static final String COLOUR_VERBOSE = Colours.MAGENTA;
+	private static final String COLOUR_TRACE   = Colours.BLACK;
 
-	private static final String ERROR_PREFIX   = "X";
-	private static final String WARNING_PREFIX = "!";
-	private static final String SUCCESS_PREFIX = "~";
-	private static final String DEBUG_PREFIX   = "#";
-	private static final String INFO_PREFIX    = ">";
-	private static final String VERBOSE_PREFIX = "@";
+	private static final String PREFIX_ERROR   = "X";
+	private static final String PREFIX_WARNING = "!";
+	private static final String PREFIX_SUCCESS = "~";
+	private static final String PREFIX_DEBUG   = "#";
+	private static final String PREFIX_INFO    = ">";
+	private static final String PREFIX_VERBOSE = "@";
 
 	private static final String [] PREFIXES = {
-		ERROR_PREFIX,
-		WARNING_PREFIX,
-		SUCCESS_PREFIX,
-		DEBUG_PREFIX,
-		INFO_PREFIX,
-		VERBOSE_PREFIX
+		PREFIX_ERROR,
+		PREFIX_WARNING,
+		PREFIX_SUCCESS,
+		PREFIX_DEBUG,
+		PREFIX_INFO,
+		PREFIX_VERBOSE
 	};
 
 	private static final String [] COLOURS = {
-		ERROR_COLOUR,
-		WARNING_COLOUR,
-		SUCCESS_COLOUR,
-		DEBUG_COLOUR,
-		INFO_COLOUR,
-		VERBOSE_COLOUR
+		COLOUR_ERROR,
+		COLOUR_WARNING,
+		COLOUR_SUCCESS,
+		COLOUR_DEBUG,
+		COLOUR_INFO,
+		COLOUR_VERBOSE
 	};
 
 	public enum Level
@@ -107,7 +108,16 @@ class Log
 			caller = stack[4].getMethodName() + ":";
 		}
 
-		return String.format("%s%s%s ", file, line, caller);
+
+		if (enableColour)
+		{
+			return String.format("%s%s%s%s%s ", COLOUR_TRACE, file, line, caller, Colours.RESET);
+		}
+		else
+		{
+			return String.format("%s%s%s ", file, line, caller);
+		}
+
 	}
 
 	private static String getPrefix(Level level)
