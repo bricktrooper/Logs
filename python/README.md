@@ -87,3 +87,15 @@ X test: ERROR
 # <module>: DEBUG
 @ <module>: VERBOSE
 ```
+
+#### Installation
+
+To install the `log` package:
+```
+pip install .
+```
+
+To uninstall the package:
+```
+pip uninstall log
+```
