@@ -92,7 +92,8 @@ X test: ERROR
 
 To install the `log` package:
 ```
-pip install .
+git clone https://github.com/bricktrooper/Logs
+pip install Logs/python
 ```
 
 To uninstall the package:
