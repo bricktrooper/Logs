@@ -90,7 +90,7 @@ X test: ERROR
 
 #### Installation
 
-To install the `log` package:
+To install the `log` package, download and run `install.py`:
 ```
 python3 install.py
 ```
